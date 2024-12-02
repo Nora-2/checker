@@ -1,62 +1,78 @@
-import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:checker/core/widgets/circularContainer.dart';
+import 'package:checker/core/utilis/appcolors/app_colors.dart';
 
 class TopStack extends StatelessWidget {
   final String text1;
-  final String text2;
+  final String? text2;
+  final Widget child;
+  final VoidCallback onBackPressed; 
 
   const TopStack({
     super.key,
     required this.text1,
-    required this.text2,
+    this.text2,
+    required this.child,
+    required this.onBackPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Stack(
       children: [
+        Column(
+          children: [
+            Container(
+              height: height * 0.21,
+              decoration: BoxDecoration(
+                gradient: AppGradients.primaryGradient,
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(70),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: AppGradients.primaryGradient,
+              ),
+              child: Container(
+                height: height * 0.75,
+                decoration: BoxDecoration(
+                  color: Appcolors.whicolor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(70),
+                  ),
+                ),
+                child: child,
+              ),
+            )
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.only(top: height * 0.05),
+          alignment: Alignment.topLeft,
+          child: IconButton(
+            onPressed: onBackPressed, // Call the passed callback
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Color.fromARGB(255, 242, 238, 238),
+            ),
+          ),
+        ),
         Positioned(
-            top: -250,
-            right: -230,
-            child: CircularContainer(
-              background:
-                  const Color.fromARGB(255, 179, 232, 222).withOpacity(0.3),
-            )),
-        Positioned(
-            top: -320,
-            right: -100,
-            child: CircularContainer(
-              background:
-                  const Color.fromARGB(255, 205, 228, 224).withOpacity(0.2),
-            )),
-        Positioned(
-            top: -370,
-            right: -10,
-            child: CircularContainer(
-              background:
-                  const Color.fromARGB(255, 220, 232, 230).withOpacity(0.1),
-            )),
-        Positioned(
-            left: 30,
-            top: 110,
-            child: Text(
-              text1,
-              style:  TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Appcolors.whicolor),
-            )),
-        Positioned(
-            left: 30,
-            top: 140,
-            child: Text(
-              text2,
-              style:  TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Appcolors.kDrawerTextColor),
-            ))
+          top: height * 0.14,
+          left: width * 0.43,
+          child: Text(
+            text1,
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Appcolors.whicolor,
+            ),
+          ),
+        )
       ],
     );
   }

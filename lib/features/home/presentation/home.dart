@@ -1,11 +1,11 @@
 import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:checker/core/utilis/appicons/app_icons.dart';
 import 'package:checker/features/home/controller/home_controller.dart';
-import 'package:checker/features/management/views/image_picker.dart';
+import 'package:checker/features/management/views/management.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:checker/core/widgets/Textformfield.dart';
-import 'package:checker/core/widgets/topStack.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -65,89 +65,55 @@ class _HomeScreenState extends State<HomeScreen> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor:  Appcolors.secondarycolor,
+      backgroundColor: Appcolors.homeBack,
       body: Stack(
         children: [
           IgnorePointer(
             ignoring: _isScreenIgnored,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    color: Appcolors.secondarycolor,
-                    child: SizedBox(
-                      width: width,
-                      height: height * 0.23,
-                      child: const TopStack(
-                          text1: 'Scan Here!', text2: 'Scanning in Progress'),
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Container(
+                    height: height,
+                    width: width * 0.35,
+                    decoration: const BoxDecoration(
+                      gradient: AppGradients.primaryGradient,
                     ),
                   ),
-                  Container(
-                    height: height * 0.77,
-                    width: width,
-                    decoration:  BoxDecoration(
-                      color: Appcolors.whicolor,
-                      borderRadius:const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          CustomFormField(
-                            hint: 'Enter code',
-                            preicon:  Icon(Appicons.barcode),
-                            ispass: false,
-                            controller: controller.barcodeController,
-                            onsubmit: (p0) {
-                              controller.handleBarcodeSubmit(context);
-                              controller.barcodeController.clear();
-                            },
-                          ),
-                          const SizedBox(height: 16),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                     const ImageBarcodeApp(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: width * 0.9,
-                              height: height * 0.07,
-                              decoration: BoxDecoration(
-                                color: Appcolors.secondarycolor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child:  Center(
-                                child: Text(
-                                  'Management',
-                                  style: TextStyle(
-                                    color: Appcolors.whicolor,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                ),
+                Positioned(
+                  top: height * 0.20,
+                  left: width * 0.05,
+                  child: const Text(
+                    'Scan Here!',
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                ],
-              ),
+                ),
+                Positioned(
+                  top: height * 0.25,
+                  left: width * 0.05,
+                  child: const Text(
+                    'Scanning in Progress',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          // Invisible button
           Positioned(
-            top: 30,
-            left: 0,
-            right: -350,
+            top: height * 0.10,
+            left: width * 0.3,
             child: GestureDetector(
               onDoubleTap: () {
                 setState(() {
@@ -155,12 +121,98 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               onTap: _showPasswordDialog,
-              child: Container(
-                height: 50,
-                color: Colors.transparent,
-                child:  Icon(
-                  color:Appcolors.whicolor,
-                    Icons.settings_accessibility), // Invisible button
+              child: const Icon(
+                size: 40.0,
+                  color: Colors.red, Icons.settings_accessibility),
+            ),
+          ),
+          Stack(
+            children: [
+              IgnorePointer(
+                ignoring: _isScreenIgnored,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: width * 0.35,
+                      top: 0,
+                      bottom: 0,
+                      child: Container(
+                        height: height,
+                        width: width * 0.66,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            bottomLeft: Radius.circular(40),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: height * 0.28,
+                      left: width * 0.57,
+                      child: SizedBox(
+                        width: width * 0.3,
+                        height: height * 0.2,
+                        child: CustomFormField(
+                          hint: 'Enter code',
+                          preicon: Icon(Appicons.barcode),
+                          ispass: false,
+                          controller: controller.barcodeController,
+                          onsubmit: (p0) {
+                            controller.handleBarcodeSubmit(context);
+                            controller.barcodeController.clear();
+                          },
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: height * 0.40,
+                      left: width * 0.57,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const Management(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: width * 0.3,
+                          height: height * 0.09,
+                          decoration: BoxDecoration(
+                            gradient: AppGradients.primaryGradient,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Management',
+                              style: TextStyle(
+                                color: Appcolors.whicolor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          Positioned(
+            top: height * 0.6,
+            left: width * 0.18,
+            child: Transform.rotate(
+              angle: 0,
+              child: Lottie.asset(
+                'assets/Lottie/Scan.json',
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width * 0.35,
               ),
             ),
           ),

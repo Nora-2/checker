@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class Appcolors {
   static Color primarycolor = const Color(0xff266DAE);
-  static Color secondarycolor =  Colors.blueGrey;
+  static Color secondarycolor = Color(0xff266DAE);
+  static Color homeBack = const Color.fromARGB(255, 134, 192, 180);
+  static Color imgBorder = Color.fromARGB(255, 131, 168, 181);
   static Color seccolor = Colors.grey;
   static Color redcolor = Colors.red;
   static Color transcolor = Colors.transparent;
@@ -20,7 +22,16 @@ class Appcolors {
   static Color kBackgroundShadowColor = const Color(0x4D161616);
   static Color kDrawerLineColor = const Color(0xFF707070);
   static Color kInactiveButtonColor = const Color(0xFF474747);
-  static Color kDrawerTextColor = const Color(0xFFBEBEBE);
+  static Color kDrawerTextColor = Color.fromARGB(255, 168, 165, 165);
   static Color kSubTitleCardBoxColor = const Color(0xFF8E8E8E);
   static Color kSearchAppBarColor = const Color(0xFF161616);
+}
+
+class AppGradients {
+  static const LinearGradient primaryGradient = LinearGradient(
+    colors: [
+      Color(0xff266DAE),
+      Color.fromARGB(255, 134, 192, 180),
+    ],
+  );
 }

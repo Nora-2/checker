@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:checker/welcome.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.camera.request();
   runApp(const checker());

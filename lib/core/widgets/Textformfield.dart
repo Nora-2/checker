@@ -17,6 +17,8 @@ class CustomFormField extends StatefulWidget {
     this.onSaved,
     this.onChanged,
     this.onsubmit,
+    this.autofocus = false, // Add this property
+
     super.key,
   });
   final bool ispass;
@@ -31,6 +33,8 @@ class CustomFormField extends StatefulWidget {
   final String? Function(String?)? val;
   final void Function(String?)? onChanged;
   void Function(String?)? onSaved;
+  final bool autofocus; // New property to control focus
+
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
 }
@@ -39,11 +43,17 @@ class _CustomFormFieldState extends State<CustomFormField> {
   late FocusNode _focusNode;
 
   @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
-    _focusNode.requestFocus();
+void initState() {
+  super.initState();
+  _focusNode = FocusNode();
+
+  if (widget.autofocus) {
+    Future.delayed(Duration.zero, () {
+      _focusNode.requestFocus();
+    });
   }
+}
+
 
   @override
   void dispose() {
@@ -53,8 +63,11 @@ class _CustomFormFieldState extends State<CustomFormField> {
 
   @override
   Widget build(BuildContext context) {
+   
     return TextFormField(
-      focusNode: _focusNode,
+      
+      autofocus: true, // This field will get focus initially
+   
       onFieldSubmitted: (value) {
         if (widget.onsubmit != null) {
           widget.onsubmit!(value);

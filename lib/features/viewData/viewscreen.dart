@@ -1,9 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:io';
 import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:checker/core/utilis/appimage/app_images.dart';
-import 'package:flutter/material.dart';
 import 'package:checker/core/widgets/output.dart';
 import 'package:checker/core/widgets/topStack.dart';
+import 'package:checker/features/home/presentation/home.dart';
+import 'package:flutter/material.dart';
 
 class Viewpage extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -17,10 +20,9 @@ class _ViewpageState extends State<Viewpage> {
   @override
   void initState() {
     super.initState();
-    // Delay Navigator.pop() to simulate automatic navigation after 5 seconds
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 7), () {
       if (mounted) {
-        Navigator.pop(context); // Safely pop the screen if the widget is still mounted
+        Navigator.pop(context);
       }
     });
   }
@@ -31,81 +33,91 @@ class _ViewpageState extends State<Viewpage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Appcolors.secondarycolor,
-      body: Column(
-        children: [
-          Container(
-            color: Appcolors.secondarycolor,
-            child: SizedBox(
-              width: width,
-              height: height * 0.23,
-              child: const TopStack(
-                text1: 'Scan View ',
-                text2: 'Details of Scanned Items',
-              ),
-            ),
+      backgroundColor: Appcolors.whicolor,
+      body: TopStack(
+        text1: 'Scan View',
+        text2: 'Details of Scanned Items',
+        onBackPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
           ),
-          Expanded( // Use Expanded to take up the remaining space
-            child: Container(
-              width: width,
-              decoration:  BoxDecoration(
-                color: Appcolors.whicolor,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: SingleChildScrollView( // Only one scroll view is needed
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: height * 0.07, left: width * 0.036, right: width * 0.036),
+          child: SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: height * 0.03),
-                      Center(
-                        child: SizedBox(
-                          height: height * 0.2,
-                          width: width*.2,
-                          child: widget.product['item_photo'] != null
-                              ? Image.file(
-                                  File(widget.product['item_photo']),
-                                  fit: BoxFit.fill,
-                                )
-                              : Image.asset(
-                                  Appimage.product, // Your placeholder image
-                                  fit: BoxFit.fill,
-                                ),
-                        ),
+                      Output(
+                        label: '  Barcode : ',
+                        value: widget.product['barcode'],
                       ),
-                      SizedBox(height: height * 0.03),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Output(label: '  Barcode : ', value: widget.product['barcode']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Brand : ', value: widget.product['brand']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Category : ', value: widget.product['category']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Item : ', value: widget.product['item']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Description : ', value: widget.product['description']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Unit : ', value: widget.product['unit']),
-                            SizedBox(height: height * 0.03),
-                            Output(label: '  Unit Price : ', value: widget.product['unit_price']),
-                          ],
-                        ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Brand : ',
+                        value: widget.product['brand'],
+                      ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Category : ',
+                        value: widget.product['category'],
+                      ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Item : ',
+                        value: widget.product['item'],
+                      ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Description : ',
+                        value: widget.product['description'],
+                      ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Unit : ',
+                        value: widget.product['unit'],
+                      ),
+                      const SizedBox(height: 16),
+                      Output(
+                        label: '  Unit Price : ',
+                        value: widget.product['unit_price'],
                       ),
                     ],
                   ),
                 ),
-              ),
+                Container(
+                  height: height * 0.5,
+                  width: width * 0.4,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: widget.product['item_photo'] != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.file(
+                            File(widget.product['item_photo']),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            Appimage.product,
+                            fit: BoxFit.cover,
+                          )),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

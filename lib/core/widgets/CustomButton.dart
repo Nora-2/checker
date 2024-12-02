@@ -1,31 +1,44 @@
-// ignore_for_file: file_names
-
 import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:flutter/material.dart';
-// ignore: camel_case_types
-class customButton extends StatelessWidget {
-  const customButton({super.key, required this.text});
 
+class Custombutton extends StatelessWidget {
   final String text;
+  final VoidCallback onPressed;
+  final double borderRadius;
+
+  const Custombutton({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    
+    this.borderRadius = 8.0,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Container(
+      width: width * 0.2,
+      height: height * 0.09,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Appcolors.primarycolor,
+         gradient: AppGradients.primaryGradient,
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
-      width: width * 0.84,
-      height: height * 0.07,
-      child: Center(
-        child: Text(
-          text,
-          style:  TextStyle(
-              color: Appcolors.whicolor,
-              fontSize: 25,
-              fontFamily: 'MulishRomanBold',
-              fontWeight: FontWeight.bold),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent, // Transparent background
+          shadowColor: Colors.transparent, // Remove shadow
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ),
       ),
     );
