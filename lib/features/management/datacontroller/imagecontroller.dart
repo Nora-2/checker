@@ -6,8 +6,6 @@ import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -62,14 +60,14 @@ class ImageBarcodeController extends GetxController {
           }
 
           // Print uploaded data
-          print("Uploaded Data: $uploadedData");
+          
 
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Excel uploaded successfully!")),
+             SnackBar(content: Text("excelUploadedSuccessfully".tr)),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Failed to get file path.")),
+             SnackBar(content: Text("failedToGetFilePath".tr)),
           );
         }
       } else {
@@ -104,12 +102,12 @@ class ImageBarcodeController extends GetxController {
     PermissionStatus storagePermission = await Permission.storage.request();
     if (!storagePermission.isGranted) {
       Get.snackbar(
-        "Permission Denied",
-        "Storage permission is required.",
+        'permissionDenied'.tr,
+        'storagePermissionIsRequired'.tr,
         snackPosition: SnackPosition.BOTTOM,
         mainButton: TextButton(
           onPressed: () => openAppSettings(),
-          child: const Text("Open Settings"),
+          child:  Text('openSettings'.tr),
         ),
       );
     } else if (await Permission.manageExternalStorage.request().isGranted) {

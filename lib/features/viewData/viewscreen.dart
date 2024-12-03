@@ -7,6 +7,7 @@ import 'package:checker/core/widgets/output.dart';
 import 'package:checker/core/widgets/topStack.dart';
 import 'package:checker/features/home/presentation/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Viewpage extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -41,8 +42,8 @@ class _ViewpageState extends State<Viewpage> {
     return Scaffold(
       backgroundColor: Appcolors.whicolor,
       body: TopStack(
-        text1: 'Scan View',
-        text2: 'Details of Scanned Items',
+        text1: 'scanView'.tr,
+        text2: 'detailsOfScannedItem'.tr,
         onBackPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
@@ -62,37 +63,37 @@ class _ViewpageState extends State<Viewpage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Output(
-                        label: '  Barcode : ',
+                        label: 'barcodeLabel'.tr,
                         value: widget.product['barcode'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Brand : ',
+                        label:'brandLabel'.tr,
                         value: widget.product['brand'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Category : ',
+                        label: 'categoryLabel'.tr,
                         value: widget.product['category'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Item : ',
+                        label: 'itemLabel'.tr,
                         value: widget.product['item'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Description : ',
+                        label: 'descriptionLabel'.tr,
                         value: widget.product['description'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Unit : ',
+                        label: 'unitLabel'.tr,
                         value: widget.product['unit'],
                       ),
                       const SizedBox(height: 16),
                       Output(
-                        label: '  Unit Price : ',
+                        label: 'unitPriceLabel'.tr,
                         value: widget.product['unit_price'],
                       ),
                     ],

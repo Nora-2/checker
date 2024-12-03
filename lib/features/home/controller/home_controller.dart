@@ -23,7 +23,7 @@ class HomeController extends GetxController {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Product not found.")),
+           SnackBar(content: Text('productNotFound'.tr)),
         );
       }
       

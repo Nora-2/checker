@@ -48,12 +48,12 @@ class AddProductController extends GetxController {
     PermissionStatus storagePermission = await Permission.storage.request();
     if (!storagePermission.isGranted) {
       Get.snackbar(
-        "Permission Denied",
-        "Storage permission is required.",
+        'permissionDenied'.tr,
+        'storagePermissionIsRequired'.tr,
         snackPosition: SnackPosition.BOTTOM,
         mainButton: TextButton(
           onPressed: () => openAppSettings(),
-          child: const Text('Open Settings'),
+          child:  Text('openSettings'.tr),
         ),
       );
     }
@@ -80,7 +80,7 @@ class AddProductController extends GetxController {
 
   void saveProduct() async {
     if (_image == null) {
-      _showMessage("Please select an image.");
+      _showMessage('pleaseSelectAnImage'.tr);
       return;
     }
 
@@ -89,7 +89,7 @@ class AddProductController extends GetxController {
 
       await DatabaseHelper.instance.insertOrUpdateProduct(productData);
 
-      _showMessage('Product added successfully!');
+      _showMessage('productAddedSuccessfully'.tr);
       clearFields();
       Get.back();
     }

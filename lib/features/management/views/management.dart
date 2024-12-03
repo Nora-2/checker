@@ -1,5 +1,7 @@
+
 import 'dart:io';
 import 'package:checker/core/utilis/appcolors/app_colors.dart';
+import 'package:checker/core/utilis/localization/localcontroller.dart';
 import 'package:checker/core/utilis/sizedbox/sizedbox.dart';
 import 'package:checker/core/widgets/CustomButton.dart';
 import 'package:checker/core/widgets/topStack.dart';
@@ -10,11 +12,17 @@ import 'package:checker/features/management/views/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Management extends StatelessWidget {
+class Management extends StatefulWidget {
   const Management({super.key});
 
   @override
+  State<Management> createState() => _ManagementState();
+}
+
+class _ManagementState extends State<Management> {
+  @override
   Widget build(BuildContext context) {
+    final Localcontroller localcontroller = Get.find();
     final ImageBarcodeController imageController =
         Get.put(ImageBarcodeController());
     final width = MediaQuery.of(context).size.width;
@@ -25,7 +33,7 @@ class Management extends StatelessWidget {
         child: Column(
           children: [
             TopStack(
-              text1: 'Management',
+              text1: 'management'.tr,
               onBackPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -36,6 +44,22 @@ class Management extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     sized.s80,
+                 Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    const Text('English'),
+    Obx(() {
+      return Switch(
+        value: localcontroller.initialLang.value.languageCode == 'ar', // Check if language is Arabic
+        onChanged: (value) {
+          localcontroller.changeLanguage(value ? 'ar' : 'en'); // Toggle between languages
+        },
+      );
+    }),
+    const Text('العربية'),
+  ],
+),
+
                     Obx(() {
                       if (imageController.imagePath.value != null) {
                         return Center(
@@ -79,12 +103,12 @@ class Management extends StatelessWidget {
                           return imageController.isLoading.value
                               ? const CircularProgressIndicator()
                               : Custombutton(
-                                  text: 'Upload Excel',
+                                  text: 'uploadExcel'.tr,
                                   onPressed: () => imageController
                                       .handleExcelUpload(context));
                         }),
                         Custombutton(
-                          text: 'Add Manually',
+                          text: 'addManually'.tr,
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -93,7 +117,7 @@ class Management extends StatelessWidget {
                           ),
                         ),
                         Custombutton(
-                            text: 'Download Excel',
+                            text: 'downloadExcel'.tr,
                             onPressed: () {
                               downloadData(context);
                             }),

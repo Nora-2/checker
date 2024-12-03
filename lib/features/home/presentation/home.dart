@@ -23,18 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Enter Password'),
+          title:  Text('enterPassword'.tr),
           content: TextField(
             controller: passwordController,
             obscureText: true,
-            decoration: const InputDecoration(hintText: 'Password'),
+            decoration:  InputDecoration(hintText: 'password'.tr),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child:  Text('cancel'.tr),
             ),
             TextButton(
               onPressed: () {
@@ -53,11 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Incorrect password')),
+                     SnackBar(content: Text('incorrecpassword'.tr)),
                   );
                 }
               },
-              child: const Text('Submit'),
+              child:  Text('submit'.tr),
             ),
           ],
         );
@@ -94,9 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Positioned(
                   top: height * 0.20,
                   left: width * 0.05,
-                  child: const Text(
-                    'Scan Here!',
-                    style: TextStyle(
+                  child:  Text(
+                    'scanHere'.tr,
+                    style:const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -106,9 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Positioned(
                   top: height * 0.25,
                   left: width * 0.05,
-                  child: const Text(
-                    'Scanning in Progress',
-                    style: TextStyle(
+                  child:  Text(
+                    'scanningInProgress'.tr,
+                    style:const TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70,
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: width * 0.3,
                         height: height * 0.2,
                         child: CustomFormField(
-                          hint: 'Enter code',
+                          hint: 'enterCode'.tr,
                           preicon: Icon(Appicons.barcode),
                           ispass: false,
                           controller: controller.barcodeController,

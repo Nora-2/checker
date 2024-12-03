@@ -3,6 +3,7 @@ import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:checker/core/utilis/appimage/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:checker/features/home/presentation/home.dart';
+import 'package:get/get.dart';
 
 class Welcomepage extends StatelessWidget {
   const Welcomepage({super.key});
@@ -30,7 +31,7 @@ class Welcomepage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: height * 0.05),
                 child: Text(
-                  'Welcome To Price Checker App!',
+                  'welcome'.tr,
                   style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -41,7 +42,7 @@ class Welcomepage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: height * 0.01),
                 child: Text(
-                  'Our app helps you to easily scan different products \n           view price , brand , description and more',
+                  'ourAppHelpsYou'.tr,
                   style: TextStyle(
                     fontSize: 20,
                     color: Appcolors.kDrawerTextColor,

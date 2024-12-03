@@ -25,7 +25,7 @@ class AddProductScreen extends StatelessWidget {
           children: [
            
             TopStack(
-              text1: 'Add Product', 
+              text1: 'addProduct'.tr, 
               onBackPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -40,7 +40,7 @@ class AddProductScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         CustomFormField(
-                          hint: 'Barcode',
+                          hint: 'barcode'.tr,
                           preicon: Icon(Appicons.barcode),
                           ispass: false,
                           controller: controller.barcodecontroller,
@@ -49,14 +49,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a barcode';
+                              return 'pleaseEnterABarcode'.tr;
                             }
                             return null;
                           },
                         ),
                         sized.s20,
                         CustomFormField(
-                          hint: 'Brand',
+                          hint: 'brand'.tr,
                           preicon: Icon(Appicons.brand),
                           ispass: false,
                           controller: controller.brandcontroller,
@@ -65,14 +65,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a brand';
+                              return 'pleaseEnterABrand'.tr;
                             }
                             return null;
                           },
                         ),
                          sized.s20,
                         CustomFormField(
-                          hint: 'Category',
+                          hint: 'category'.tr,
                           preicon: Icon(Appicons.category),
                           ispass: false,
                           controller: controller.categorycontroller,
@@ -81,14 +81,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a category';
+                              return 'pleaseEnterACategory'.tr;
                             }
                             return null;
                           },
                         ),
                         sized.s20,
                         CustomFormField(
-                          hint: 'Item',
+                          hint: 'item'.tr,
                           preicon: Icon(Appicons.input),
                           ispass: false,
                           controller: controller.itemcontroller,
@@ -97,14 +97,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter an item';
+                              return 'pleaseEnterAnItem'.tr;
                             }
                             return null;
                           },
                         ),
                          sized.s20,
                         CustomFormField(
-                          hint: 'Description',
+                          hint: 'description'.tr,
                           preicon: Icon(Appicons.description),
                           ispass: false,
                           controller: controller.descrcontroller,
@@ -113,14 +113,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a description';
+                              return 'pleaseEnterADescription'.tr;
                             }
                             return null;
                           },
                         ),
                         sized.s20,
                         CustomFormField(
-                          hint: 'Unit',
+                          hint: 'unit'.tr,
                           preicon: Icon(Appicons.unit),
                           ispass: false,
                           controller: controller.unitcontroller,
@@ -129,14 +129,14 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a unit';
+                              return 'pleaseEnterAUnit'.tr;
                             }
                             return null;
                           },
                         ),
                         sized.s20,
                         CustomFormField(
-                          hint: 'Unit Price',
+                          hint: 'unitPrice'.tr,
                           preicon: Icon(Appicons.unitprice),
                           ispass: false,
                           controller: controller.unitpricecontroller,
@@ -145,7 +145,7 @@ class AddProductScreen extends StatelessWidget {
                           },
                           val: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a unit price';
+                              return 'pleaseEnterAUnitPrice'.tr;
                             }
                             return null;
                           },
@@ -157,7 +157,7 @@ class AddProductScreen extends StatelessWidget {
                           child: GetBuilder<AddProductController>(builder: (controller) {
                             return controller.imagePath != null
                                 ? Image.file(File(controller.imagePath!))
-                                : const Text('No image selected', textAlign: TextAlign.center);
+                                : Text('noImageSelected'.tr, textAlign: TextAlign.center);
                           }),
                         ),
                         Row(
