@@ -43,7 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     _isScreenIgnored = false; // Enable interactivity
                   });
-                  Navigator.of(context).pop();
+                   Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const Management(),
+                            ),
+                          );
+                  
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Incorrect password')),
@@ -166,39 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: height * 0.40,
-                      left: width * 0.57,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const Management(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: width * 0.3,
-                          height: height * 0.09,
-                          decoration: BoxDecoration(
-                            gradient: AppGradients.primaryGradient,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Management',
-                              style: TextStyle(
-                                color: Appcolors.whicolor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                   
                   ],
                 ),
               )

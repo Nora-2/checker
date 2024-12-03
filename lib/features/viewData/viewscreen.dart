@@ -22,7 +22,13 @@ class _ViewpageState extends State<Viewpage> {
     super.initState();
     Future.delayed(const Duration(seconds: 7), () {
       if (mounted) {
-        Navigator.pop(context);
+         Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const HomeScreen(),
+                            ),
+                          );
       }
     });
   }

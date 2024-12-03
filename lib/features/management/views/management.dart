@@ -6,6 +6,7 @@ import 'package:checker/core/widgets/topStack.dart';
 import 'package:checker/features/home/presentation/home.dart';
 import 'package:checker/features/management/datacontroller/imagecontroller.dart';
 import 'package:checker/features/management/views/addproductscreen.dart';
+import 'package:checker/features/management/views/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,11 +27,11 @@ class Management extends StatelessWidget {
             TopStack(
               text1: 'Management',
               onBackPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          ),
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeScreen(),
+                ),
+              ),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -56,7 +57,8 @@ class Management extends StatelessWidget {
                             height: height * 0.4,
                             decoration: BoxDecoration(
                                 border: Border.fromBorderSide(
-                                  BorderSide(color: Appcolors.imgBorder, width: 2),
+                                  BorderSide(
+                                      color: Appcolors.imgBorder, width: 2),
                                 ),
                                 borderRadius: const BorderRadiusDirectional.all(
                                   Radius.circular(10),
@@ -90,6 +92,11 @@ class Management extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Custombutton(
+                            text: 'Download Excel',
+                            onPressed: () {
+                              downloadData(context);
+                            }),
                       ],
                     ),
                   ]),
