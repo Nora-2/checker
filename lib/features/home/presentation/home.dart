@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     _isScreenIgnored = false; // Enable interactivity
                   });
+                  Navigator.of(context).pop();
                    Navigator.push(
                             context,
                             MaterialPageRoute<void>(
@@ -169,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onsubmit: (p0) {
                             controller.handleBarcodeSubmit(context);
                             controller.barcodeController.clear();
-                          },
+                          }, focusNode: controller.barcodeFocusNode,
                         ),
                       ),
                     ),

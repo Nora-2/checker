@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
   final barcodeController = TextEditingController();
+  final FocusNode barcodeFocusNode = FocusNode(); // Create a FocusNode
 
 
   // Handle Barcode Search
@@ -25,6 +26,8 @@ class HomeController extends GetxController {
         ScaffoldMessenger.of(context).showSnackBar(
            SnackBar(content: Text('productNotFound'.tr)),
         );
+        barcodeFocusNode.requestFocus();
+       
       }
       
     }

@@ -4,7 +4,7 @@ import 'package:checker/core/utilis/appcolors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomFormField extends StatefulWidget {
-   CustomFormField({
+  CustomFormField({
     required this.hint,
     required this.preicon,
     this.text,
@@ -18,10 +18,11 @@ class CustomFormField extends StatefulWidget {
     this.onChanged,
     this.onsubmit,
     this.autofocus = false, // Add this property
-
+   this.focusNode,
     super.key,
   });
   final bool ispass;
+   FocusNode? focusNode;
   final String hint;
   final Widget preicon;
   final TextInputType? text;
@@ -43,17 +44,16 @@ class _CustomFormFieldState extends State<CustomFormField> {
   late FocusNode _focusNode;
 
   @override
-void initState() {
-  super.initState();
-  _focusNode = FocusNode();
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
 
-  if (widget.autofocus) {
-    Future.delayed(Duration.zero, () {
-      _focusNode.requestFocus();
-    });
+    if (widget.autofocus) {
+      Future.delayed(Duration.zero, () {
+        widget.focusNode!.requestFocus();
+      });
+    }
   }
-}
-
 
   @override
   void dispose() {
@@ -63,16 +63,13 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-   
     return TextFormField(
-      
       autofocus: true, // This field will get focus initially
-   
+focusNode: widget.focusNode,
       onFieldSubmitted: (value) {
         if (widget.onsubmit != null) {
           widget.onsubmit!(value);
         }
-        // Request focus again after submitting
         _focusNode.requestFocus();
       },
       onSaved: widget.onSaved,
@@ -85,13 +82,12 @@ void initState() {
       decoration: InputDecoration(
         hintText: widget.hint,
         prefixIconColor: Appcolors.secondarycolor,
-        
-        hintStyle:  TextStyle(color: Appcolors.seccolor, fontSize: 16),
+        hintStyle: TextStyle(color: Appcolors.seccolor, fontSize: 16),
         prefixIcon: widget.preicon,
         suffixIcon: widget.suffix,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide:  BorderSide(color: Appcolors.secondarycolor)),
+            borderSide: BorderSide(color: Appcolors.secondarycolor)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(),
@@ -109,7 +105,7 @@ void initState() {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             color: Appcolors.seccolor,
           ),
         ),
